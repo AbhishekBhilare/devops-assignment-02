@@ -51,3 +51,4 @@ variable "map_users" {
       groups   = ["system:masters"]
     },
   ]
+}
