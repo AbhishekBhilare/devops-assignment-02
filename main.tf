@@ -95,7 +95,7 @@ module "eks" {
 
   worker_additional_security_group_ids = [aws_security_group.all_worker_mgmt.id]
   map_roles                            = var.map_roles
-  map_users                            = var.map_users
+ 
 }
 
 
