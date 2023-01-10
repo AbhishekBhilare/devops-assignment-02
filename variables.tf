@@ -1,51 +1,56 @@
-variable "aws_region" {
-       description = "The AWS region to create things in." 
-       default     = "us-east-1" 
+variable "region" {
+  default     = "us-east-1"
+  description = "AWS region"
 }
 
-variable "key_name" { 
-    description = " SSH keys to connect to ec2 instance" 
-    default     =  "Abhishek-keypair-OpenSSH" 
+variable "cluster_name" {
+  default = "getting-started-eks"
 }
 
-variable "instance_type" { 
-    description = "instance type for ec2" 
-    default     =  "t2.micro" 
+# variable "map_accounts" {
+#   description = "Additional AWS account numbers to add to the aws-auth configmap."
+#   type        = list(string)
+
+#   default = [
+#     "777777777777",
+#     "888888888888",
+#   ]
+# }
+
+variable "map_roles" {
+  description = "Additional IAM roles to add to the aws-auth configmap."
+  type = list(object({
+    rolearn  = string
+    username = string
+    
+  }))
+
+  default = [
+    {
+      rolearn  = "arn:aws:iam::272814864966:role/Terraform-role"
+      username = "Terraform-role"
+     
+    },
+  ]
 }
 
-variable "security_group" { 
-    description = "Name of security group" 
-    default     = "jenkins-sgroup-dec-2021" 
-}
+# variable "map_users" {
+#   description = "Additional IAM users to add to the aws-auth configmap."
+#   type = list(object({
+#     userarn  = string
+#     username = string
+#     groups   = list(string)
+#   }))
 
-variable "tag_name" { 
-    description = "Tag Name of for Ec2 instance" 
-    default     = "my-ec2-instance" 
-} 
-variable "ami_id" { 
-    description = "AMI for Ubuntu Ec2 instance" 
-    default     = "ami-0ee23bfc74a881de5" 
-}
-variable "versioning" {
-    type        = bool
-    description = "(Optional) A state of versioning."
-    default     = true
-}
-variable "acl" {
-    type        = string
-    description = " Defaults to private "
-    default     = "private"
-}
-variable "bucket_prefix" {
-    type        = string
-    description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
-    default     = "my-s3bucket-"
-}
-variable "tags" {
-    type        = map
-    description = "(Optional) A mapping of tags to assign to the bucket."
-    default     = {
-        environment = "DEV"
-        terraform   = "true"
-    }
-}
+#   default = [
+#     {
+#       userarn  = "arn:aws:iam::66666666666:user/user1"
+#       username = "user1"
+#       groups   = ["system:masters"]
+#     },
+#     {
+#       userarn  = "arn:aws:iam::66666666666:user/user2"
+#       username = "user2"
+#       groups   = ["system:masters"]
+#     },
+#   ]
