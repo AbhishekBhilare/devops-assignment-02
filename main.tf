@@ -22,9 +22,9 @@ module "vpc" {
 
   name        = "worker-service"
   description = "Security group for user-service with custom ports open within VPC, and PostgreSQL publicly open"
-  vpc_id      = "vpc-12345678"
+  vpc_id      = module.vpc.vpc_id
 
-  ingress_cidr_blocks      = ["10.10.0.0/16"]
+  ingress_cidr_blocks      = ["10.0.101.0/24"]
   ingress_rules            = ["https-443-tcp"]
   ingress_with_cidr_blocks = [
     {
@@ -32,7 +32,7 @@ module "vpc" {
       to_port     = 8090
       protocol    = "tcp"
       description = "User-service ports"
-      cidr_blocks = "10.10.0.0/16"
+      cidr_blocks = "10.0.101.0/24"
     },
     {
       rule        = "postgresql-tcp"
