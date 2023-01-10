@@ -22,6 +22,7 @@ variable "map_roles" {
   type = list(object({
     rolearn  = string
     username = string
+    groups   = list(string)
     
   }))
 
@@ -29,6 +30,7 @@ variable "map_roles" {
     {
       rolearn  = "arn:aws:iam::272814864966:role/eksClusterRole"
       username = "eksClusterRole"
+      groups   = ["system:masters"]
      
     },
   ]
