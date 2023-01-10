@@ -27,8 +27,8 @@ variable "map_roles" {
 
   default = [
     {
-      rolearn  = "arn:aws:iam::272814864966:role/Terraform-role"
-      username = "Terraform-role"
+      rolearn  = "arn:aws:iam::272814864966:role/eksClusterRole"
+      username = "eksClusterRole"
      
     },
   ]
