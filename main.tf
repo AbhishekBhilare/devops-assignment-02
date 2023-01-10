@@ -7,6 +7,17 @@ provider "aws" {
   region  = var.region
 }
 
+data "aws_eks_cluster" "cluster" {
+  name = module.eks.cluster_id
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_id
+}
+
+data "aws_availability_zones" "available" {
+}
+
 
 
 resource "aws_security_group" "worker_group_mgmt_one" {
